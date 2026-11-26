@@ -1,0 +1,56 @@
+# The root Lake project of a Superpermutation Almanac batch submission: lower bounds for 11, 12, and 13 symbols
+# from Halfar's Theorem C with re-tuned constants, verified via precompiled `S.searchFast` (`native_decide`)
+# and a kernel-checked soundness proof (`LowerBounds.SearchFastEq`).
+name = "almanac_submission"
+defaultTargets = ["AlmanacSolution"]
+
+# The four reserved Almanac libraries, with their files at the repository root: each has only its name
+# and no srcDir. The judge overwrites AlmanacDefs.lean, AlmanacStatement.lean and AlmanacChallenge.lean
+# with its own.
+[[lean_lib]]
+name = "AlmanacDefs"
+
+[[lean_lib]]
+name = "AlmanacStatement"
+
+[[lean_lib]]
+name = "AlmanacChallenge"
+
+[[lean_lib]]
+name = "AlmanacSolution"
+
+# Jay Pantone's statements file (Covers), from github.com/jaypantone/superperm-upper-43-80 at c8fb7ff.
+[[lean_lib]]
+name = "Challenge"
+
+# The modules of the Hunter-Raudvere library that the proof needs (github.com/urdvr/superpermutations-hunter).
+[[lean_lib]]
+name = "Hunter"
+
+# The modules of Xiaolong Liu's preimage-chain library that the proof needs
+# (github.com/Haruhiyuki/superpermutations-preimage-chain-lower-bounds).
+[[lean_lib]]
+name = "PreimageChain"
+
+# From github.com/jhalfar/superpermutations: the bridge to Hunter.Ssuper (proofs/lean/words) and the
+# lower-bound development with Theorem C (proofs/lean/lower).
+[[lean_lib]]
+name = "Superperm"
+
+[[lean_lib]]
+name = "LowerBounds"
+
+# The linking lemmas: the Almanac templates from the theorems of LowerBounds.RecordsFinal.
+[[lean_lib]]
+name = "LowerLinks"
+
+# Compiled native library for the window search engine so `native_decide` runs compiled native code.
+[[lean_lib]]
+name = "WSearchEngine"
+roots = ["LowerBounds.SSearch", "LowerBounds.SearchFast"]
+precompileModules = true
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "56a005855ea17e0b0958f73ec801ae140b0a1679"
