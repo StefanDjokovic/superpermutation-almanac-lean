@@ -1,8 +1,10 @@
-# Superpermutation Almanac submission: AsymptoticUpper 0
-# Proves S(n) = n! + (n-1)! + (n-2)! + o((n-3)!) in 100% pure Lean 4.35.0 kernel (zero native_decide, zero sorry).
+# The root Lake project of a Superpermutation Almanac batch submission: every superpermutation on 7 symbols
+# has at least 5,900 letters, with finite searches evaluated by native_decide.
 name = "almanac_submission"
-defaultTargets = ["AlmanacSolution"]
 
+# The four reserved Almanac libraries, with their files at the repository root: each has only its name
+# and no srcDir. The judge overwrites AlmanacDefs.lean, AlmanacStatement.lean and AlmanacChallenge.lean
+# with its own.
 [[lean_lib]]
 name = "AlmanacDefs"
 
@@ -15,8 +17,45 @@ name = "AlmanacChallenge"
 [[lean_lib]]
 name = "AlmanacSolution"
 
+# Jay Pantone's statements file (Covers), from github.com/jaypantone/superperm-upper-43-80 at c8fb7ff.
 [[lean_lib]]
-name = "AsymptoticZero"
+name = "Challenge"
+
+# The modules of the Hunter-Raudvere library that the proof needs (github.com/urdvr/superpermutations-hunter).
+[[lean_lib]]
+name = "Hunter"
+
+# The modules of Xiaolong Liu's preimage-chain library that the proof needs
+# (github.com/Haruhiyuki/superpermutations-preimage-chain-lower-bounds).
+[[lean_lib]]
+name = "PreimageChain"
+
+# From github.com/jhalfar/superpermutations: the bridge to Hunter.Ssuper (proofs/lean/words) and the
+# lower-bound development (proofs/lean/lower, proofs/lean/n7).
+[[lean_lib]]
+name = "Superperm"
+
+[[lean_lib]]
+name = "LowerBounds"
+
+# The three search engines LowerBounds.PSearch, LowerBounds.KSearch and LowerBounds.K16Search (PSearch imports
+# nothing, the other two import only the engine before them) as a library of their own, compiled to native code:
+# Lake loads it when it builds the modules that import it, so the native_decide evaluations run compiled code.
+# It is declared after LowerBounds, so this library, not LowerBounds, owns the three modules.
+[[lean_lib]]
+name = "SearchEngine"
+roots = ["LowerBounds.PSearch", "LowerBounds.DualRingSearch", "LowerBounds.KSearch", "LowerBounds.K16Search", "LowerBounds.J15Search", "LowerBounds.J16Search", "LowerBounds.DomTables", "LowerBounds.FastK16Search", "LowerBounds.FastJ16Search"]
+precompileModules = true
+
+# The proof of 872 (proofs/lean/small/K6 of the same repository) and the pieces of its two searches.
+# Its proofs were written without a limit on the heartbeats of the elaborator. Not imported by this batch.
+[[lean_lib]]
+name = "K6"
+leanOptions = { maxHeartbeats = 0 }
+
+# The linking lemma: the Almanac template from the theorem of LowerBounds.PFinalK16Native.
+[[lean_lib]]
+name = "LowerLinks"
 
 [[require]]
 name = "mathlib"
