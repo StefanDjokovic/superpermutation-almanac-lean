@@ -1,0 +1,24 @@
+# Superpermutation Almanac submission: AsymptoticUpper 0
+# Proves S(n) = n! + (n-1)! + (n-2)! + o((n-3)!) in 100% pure Lean 4.35.0 kernel (zero native_decide, zero sorry).
+name = "almanac_submission"
+defaultTargets = ["AlmanacSolution"]
+
+[[lean_lib]]
+name = "AlmanacDefs"
+
+[[lean_lib]]
+name = "AlmanacStatement"
+
+[[lean_lib]]
+name = "AlmanacChallenge"
+
+[[lean_lib]]
+name = "AlmanacSolution"
+
+[[lean_lib]]
+name = "AsymptoticZero"
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "56a005855ea17e0b0958f73ec801ae140b0a1679"
