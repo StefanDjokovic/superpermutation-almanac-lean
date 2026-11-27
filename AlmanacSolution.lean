@@ -1,13 +1,11 @@
--- Pure-kernel (zero `sorry`, zero `native_decide`) formal proof of
--- `S(n) = n! + (n-1)! + (n-2)! + o((n-3)!)` (`Almanac.AsymptoticUpper 0`).
+-- Pure-kernel (`decide +kernel`, zero `native_decide`, zero `sorry`) world-record lower bound
+-- `S(13) >= 6,746,627,287` via Level-2 `TropicCEGAR` bridged to Theorem C (`LowerBounds/TropicL2Sound.lean`).
 import AlmanacDefs
-import AsymptoticZero.Main
+import LowerLinks
 
 namespace AlmanacSubmission
 
-/-- For every `ε > 0`, for all sufficiently large `n`, there exists a superpermutation on `n`
-symbols of length at most `n! + (n-1)! + (n-2)! + ε (n-3)!`. -/
-theorem asymptotic_upper : Almanac.AsymptoticUpper 0 :=
-  AsymptoticZero.asymptotic_upper_zero
+/-- Every superpermutation on 13 symbols has length at least 6,746,627,287. -/
+theorem lower_thirteen : Almanac.LowerBoundAt 13 6746627287 := LowerLinks.lower_thirteen
 
 end AlmanacSubmission

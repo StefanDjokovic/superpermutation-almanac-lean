@@ -1,8 +1,12 @@
-# Superpermutation Almanac submission: AsymptoticUpper 0
-# Proves S(n) = n! + (n-1)! + (n-2)! + o((n-3)!) in 100% pure Lean 4.35.0 kernel (zero native_decide, zero sorry).
+# The root Lake project of a Superpermutation Almanac submission: lower bound for 13 symbols
+# (`S(13) >= 6,746,627,287`) via Level-2 TropicCEGAR bridged to Theorem C, checked purely
+# by the Lean kernel (zero native_decide, zero sorry).
 name = "almanac_submission"
 defaultTargets = ["AlmanacSolution"]
 
+# The four reserved Almanac libraries, with their files at the repository root: each has only its name
+# and no srcDir. The judge overwrites AlmanacDefs.lean, AlmanacStatement.lean and AlmanacChallenge.lean
+# with its own.
 [[lean_lib]]
 name = "AlmanacDefs"
 
@@ -15,8 +19,30 @@ name = "AlmanacChallenge"
 [[lean_lib]]
 name = "AlmanacSolution"
 
+# Jay Pantone's statements file (Covers), from github.com/jaypantone/superperm-upper-43-80 at c8fb7ff.
 [[lean_lib]]
-name = "AsymptoticZero"
+name = "Challenge"
+
+# The modules of the Hunter-Raudvere library that the proof needs (github.com/urdvr/superpermutations-hunter).
+[[lean_lib]]
+name = "Hunter"
+
+# The modules of Xiaolong Liu's preimage-chain library that the proof needs
+# (github.com/Haruhiyuki/superpermutations-preimage-chain-lower-bounds).
+[[lean_lib]]
+name = "PreimageChain"
+
+# From github.com/jhalfar/superpermutations: the bridge to Hunter.Ssuper (proofs/lean/words) and the
+# lower-bound development with Theorem C (proofs/lean/lower).
+[[lean_lib]]
+name = "Superperm"
+
+[[lean_lib]]
+name = "LowerBounds"
+
+# The linking lemmas: the Almanac templates from LowerBounds.TropicN13_287.
+[[lean_lib]]
+name = "LowerLinks"
 
 [[require]]
 name = "mathlib"
